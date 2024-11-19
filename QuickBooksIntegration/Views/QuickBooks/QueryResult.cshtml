@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QuickBooksIntegration.Models.QueryResult>
+
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+
+<h2>Результаты запроса</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>TxnID</th>
+                <th>Дата</th>
+                <th>Сумма</th>
+                <th>Примечание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TxnID</td>
+                    <td>@item.Date</td>
+                    <td>@item.Amount.ToString("C")</td>
+                    <td>@item.Memo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Нет данных для отображения.</p>
+}
+
+
