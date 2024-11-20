@@ -127,7 +127,7 @@ namespace QuickBooksIntegration.Services
                 CloseConnection();
             }
         }
-        public List<QueryResult> ExecuteItemSalesQuery()
+        public List<ItemSalesTax> ExecuteItemSalesQuery()
         {
             try
             {
@@ -139,7 +139,7 @@ namespace QuickBooksIntegration.Services
                 var responseSet = _sessionManager.DoRequests(requestSet);
                 string responseXml = responseSet.ToXMLString();
 
-                return _parser.Parse(responseXml, "ItemSales");
+                return _parser.ParseItemSalesTaxResponse(responseXml);
             }
             catch (Exception ex)
             {

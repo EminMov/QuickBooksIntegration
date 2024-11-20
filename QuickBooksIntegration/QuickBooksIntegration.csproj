@@ -126,6 +126,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyInfo.cs" />
+    <Compile Include="Models\ItemSalesTax.cs" />
     <Compile Include="Models\QueryResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\QuickBooksParser.cs" />
@@ -189,6 +190,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\QuickBooks\QueryResult.cshtml" />
     <Content Include="Views\QuickBooks\CompanyInfo.cshtml" />
+    <Content Include="Views\QuickBooks\ItemSalesTax.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="QBFC16Lib">

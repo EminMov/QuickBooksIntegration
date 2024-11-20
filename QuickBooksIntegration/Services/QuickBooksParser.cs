@@ -29,14 +29,6 @@ namespace QuickBooksIntegration.Services
             {
                 nodes = xmlDoc.SelectNodes("//InvoiceRet");
             }
-            //else if (queryType == "Company")
-            //{
-            //    nodes = xmlDoc.SelectNodes("//CampanyRet");
-            //}
-            else if (queryType == "ItemSales")
-            {
-                nodes = xmlDoc.SelectNodes("//ItemSalesRet");
-            }
             else
             {
                 throw new Exception("Неизвестный тип запроса");
@@ -79,6 +71,32 @@ namespace QuickBooksIntegration.Services
             };
 
             return companyInfo;
+        }
+
+        public List<ItemSalesTax> ParseItemSalesTaxResponse(string responseXml)
+        {
+            var itemSalesTaxes = new List<ItemSalesTax>();
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(responseXml);
+
+            var nodes = xmlDoc.SelectNodes("//ItemSalesTaxRet");
+            if (nodes == null || nodes.Count == 0)
+            {
+                throw new Exception("Данные о налогах с продаж не найдены");
+            }
+
+            foreach (XmlNode node in nodes)
+            {
+                var itemSalesTax = new ItemSalesTax()
+                {
+                    Name = node.SelectSingleNode("Name")?.InnerText,
+                    TaxCode = node.SelectSingleNode("ItemSalesTaxRef/FullName")?.InnerText,
+                    Rate = decimal.TryParse(node.SelectSingleNode("TaxRate")?.InnerText, out var rate) ? rate : 0,
+                    Description = node.SelectSingleNode("ItemDesc")?.InnerText
+                };
+                itemSalesTaxes.Add(itemSalesTax);
+            }
+            return itemSalesTaxes;
         }
     }
 }

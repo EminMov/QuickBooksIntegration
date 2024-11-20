@@ -69,7 +69,7 @@ namespace QuickBooksIntegration.Controllers
             try
             {
                 var results = _quickBooksService.ExecuteItemSalesQuery();
-                return View("QueryResult", results);
+                return View("ItemSalesTax", results);
             }
             catch (Exception ex)
             {

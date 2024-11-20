@@ -1,0 +1,37 @@
+﻿
+@model IEnumerable<QuickBooksIntegration.Models.ItemSalesTax>
+
+@{
+    ViewBag.Title = "Налоги с продаж";
+}
+
+<h2>Налоги с продаж</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Код налога</th>
+                <th>Ставка</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.TaxCode</td>
+                    <td>@item.Rate.ToString("P")</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Нет данных для отображения.</p>
+}
