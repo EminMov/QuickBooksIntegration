@@ -12,7 +12,7 @@ namespace QuickBooksIntegration.Services
     public class QuickBooksService
     {
         private readonly QBSessionManager _sessionManager;
-        private readonly QuickBooksParser _parser;
+        private readonly QuickBooksParser _parser; 
 
         public QuickBooksService()
         {
@@ -102,7 +102,8 @@ namespace QuickBooksIntegration.Services
                 CloseConnection();
             }
         }
-        public List<QueryResult> ExecuteCompanyQuery()
+
+        public CompanyInfo ExecuteCompanyQuery()
         {
             try
             {
@@ -114,7 +115,8 @@ namespace QuickBooksIntegration.Services
                 var responseSet = _sessionManager.DoRequests(requestSet);
                 string responseXml = responseSet.ToXMLString();
 
-                return _parser.Parse(responseXml, "Company");
+                return _parser.ParseCompanyResponse(responseXml);
+                //return _parser.Parse(responseXml, "Company");
             }
             catch (Exception ex)
             {

@@ -57,7 +57,7 @@ namespace QuickBooksIntegration.Controllers
             try
             {
                 var results = _quickBooksService.ExecuteCompanyQuery();
-                return View("QueryResult", results);
+                return View("CompanyInfo", results);
             }
             catch (Exception ex)
             {

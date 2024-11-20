@@ -1,0 +1,36 @@
+﻿@model QuickBooksIntegration.Models.CompanyInfo
+
+@{
+    ViewBag.Title = "Информация о компании";
+}
+
+<h2>Информация о компании</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Название компании</th>
+        <td>@Model.CompanyName</td>
+    </tr>
+    <tr>
+        <th>Юридическое название</th>
+        <td>@Model.LegalName</td>
+    </tr>
+    <tr>
+        <th>Адрес</th>
+        <td>@Model.Address</td>
+    </tr>
+    <tr>
+        <th>Телефон</th>
+        <td>@Model.PhoneNumber</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Налоговый номер (EIN)</th>
+        <td>@Model.EIN</td>
+    </tr>
+</table>
+
+

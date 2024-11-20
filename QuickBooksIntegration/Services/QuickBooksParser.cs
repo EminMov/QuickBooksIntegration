@@ -29,10 +29,10 @@ namespace QuickBooksIntegration.Services
             {
                 nodes = xmlDoc.SelectNodes("//InvoiceRet");
             }
-            else if (queryType == "Company")
-            {
-                nodes = xmlDoc.SelectNodes("//CampanyRet");
-            }
+            //else if (queryType == "Company")
+            //{
+            //    nodes = xmlDoc.SelectNodes("//CampanyRet");
+            //}
             else if (queryType == "ItemSales")
             {
                 nodes = xmlDoc.SelectNodes("//ItemSalesRet");
@@ -56,6 +56,29 @@ namespace QuickBooksIntegration.Services
             }
 
             return results;
+        }
+        public CompanyInfo ParseCompanyResponse(string responseXml)
+        {
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(responseXml);
+
+            var companyNode = xmlDoc.SelectSingleNode("//CompanyRet");
+            if (companyNode == null)
+            {
+                throw new Exception("Данные о компании не найдены");
+            }
+
+            var companyInfo = new CompanyInfo
+            {
+                CompanyName = companyNode.SelectSingleNode("CompanyName")?.InnerText,
+                LegalName = companyNode.SelectSingleNode("LegalName")?.InnerText,
+                Address = companyNode.SelectSingleNode("Address/Addr1")?.InnerText,
+                PhoneNumber = companyNode.SelectSingleNode("Phone")?.InnerText,
+                Email = companyNode.SelectSingleNode("Email")?.InnerText,
+                EIN = companyNode.SelectSingleNode("EIN")?.InnerText,
+            };
+
+            return companyInfo;
         }
     }
 }
